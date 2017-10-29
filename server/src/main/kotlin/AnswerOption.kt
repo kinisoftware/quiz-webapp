@@ -1,0 +1,1 @@
+data class AnswerOption(val id: String, val text: String)
