@@ -1,0 +1,1 @@
+data class SelectedAnswer(val questionId: String, val answerOptionId: String)
