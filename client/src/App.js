@@ -50,18 +50,23 @@ class App extends Component {
         return result.json();
       }).then(questionsFromServer => {
         let questions = questionsFromServer.map((question) => {
-          let answerOptions = question.answerOptions;
+          let answerOptions = question.answerOptions.map((answerOption) => {
+            return(
+              <div className="radio">
+              <label>
+                <input type="radio" value={answerOption.id} checked={this.state.selectedOption === answerOption.id} onChange={this.handleOptionChange} />
+                {answerOption.text}
+              </label>
+              </div>
+            );
+          });
+
         return(
           <div>
             <div>{question.text}</div>
             <div>
             <form onSubmit={this.handleFormSubmit}>
-            <div className="radio">
-              <label>
-                <input type="radio" value={answerOptions[0].id} checked={this.state.selectedOption === answerOptions[0].id} onChange={this.handleOptionChange} />
-                {answerOptions[0].text}
-              </label>
-            </div>
+            {answerOptions}
             <button className="btn btn-default" type="submit">Save</button>
             </form>
             </div>
